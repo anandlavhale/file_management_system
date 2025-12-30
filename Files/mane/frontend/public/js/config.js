@@ -5,7 +5,7 @@
 
 const CONFIG = {
     // API Base URL - change this for production
-    API_BASE_URL: 'http://localhost:5000/api',
+    API_BASE_URL: 'https://file-management-system-1wuf.onrender.com/api',
     
     // Token storage key
     TOKEN_KEY: 'fms_token',
