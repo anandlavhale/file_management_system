@@ -1,0 +1,33 @@
+{
+  "name": "file-management-system-mane",
+  "version": "1.0.0",
+  "description": "File Management System - MANE Stack (MongoDB, Angular/React, Node.js, Express.js)",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "seed": "cd backend && npm run seed",
+    "seed:delete": "cd backend && npm run seed:delete",
+    "dev:full": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "file-management",
+    "mane-stack",
+    "mongodb",
+    "express",
+    "nodejs",
+    "full-stack"
+  ],
+  "author": "File Management System",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
+

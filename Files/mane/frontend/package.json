@@ -1,0 +1,21 @@
+{
+  "name": "file-management-system-frontend",
+  "version": "1.0.0",
+  "description": "File Management System Frontend - MANE Stack",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx serve public -l 3000",
+    "dev": "npx serve public -l 3000"
+  },
+  "keywords": [
+    "file-management",
+    "frontend",
+    "mane-stack"
+  ],
+  "author": "File Management System",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
+
