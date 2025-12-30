@@ -4,7 +4,7 @@
  */
 
 const CONFIG = {
-    // API Base URL - change this for production
+    // API Base URL - Backend is deployed on Render
     API_BASE_URL: 'https://file-management-system-1wuf.onrender.com/api',
     
     // Token storage key

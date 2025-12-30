@@ -33,7 +33,13 @@ const server = http.createServer(app);
 // Initialize Socket.io with CORS
 const io = new Server(server, {
     cors: {
-        origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+        origin: [
+            process.env.FRONTEND_URL || 'http://localhost:3000',
+            'http://localhost',
+            'http://127.0.0.1',
+            /localhost/,
+            /127\.0\.0\.1/
+        ],
         methods: ['GET', 'POST'],
         credentials: true
     }
@@ -46,9 +52,17 @@ app.set('io', io);
 connectDB();
 
 // Middleware
-// Enable CORS for frontend
+// Enable CORS for frontend and local development
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: [
+        process.env.FRONTEND_URL || 'http://localhost:3000',
+        'http://localhost',
+        'http://localhost:3000',
+        'http://127.0.0.1',
+        'http://127.0.0.1:3000',
+        /localhost/,
+        /127\.0\.0\.1/
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
