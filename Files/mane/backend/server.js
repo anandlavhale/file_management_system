@@ -33,14 +33,7 @@ const server = http.createServer(app);
 // Initialize Socket.io with CORS
 const io = new Server(server, {
     cors: {
-        origin: [
-            process.env.FRONTEND_URL || 'http://localhost:3000',
-            'http://localhost',
-            'http://127.0.0.1',
-            'https://file-management-system-cewt3eqse-anandlavhales-projects.vercel.app/',
-            /localhost/,
-            /127\.0\.0\.1/
-        ],
+        origin: process.env.FRONTEND_URL || 'http://localhost:3000',
         methods: ['GET', 'POST'],
         credentials: true
     }
@@ -54,8 +47,21 @@ connectDB();
 
 // Middleware
 // Enable CORS for frontend
+const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    'http://localhost:3000',
+    'http://localhost:5000'
+].filter(Boolean);
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -75,9 +81,6 @@ if (process.env.NODE_ENV === 'development') {
 
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// Serve static files from frontend build (for production)
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -139,45 +142,6 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log(`❌ Client disconnected: ${socket.id}`);
     });
-});
-
-// Serve frontend for any other routes (SPA support)
-app.get('*', (req, res, next) => {
-    // Skip if it's an API route
-    if (req.path.startsWith('/api')) {
-        return next();
-    }
-    
-    const frontendPath = path.join(__dirname, '..', 'frontend', 'build', 'index.html');
-    if (require('fs').existsSync(frontendPath)) {
-        res.sendFile(frontendPath);
-    } else {
-        // If frontend is not built, serve a simple page
-        res.send(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>File Management System</title>
-                <style>
-                    body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
-                    h1 { color: #4472C4; }
-                    .info { background: #f0f0f0; padding: 20px; border-radius: 8px; }
-                    code { background: #e0e0e0; padding: 2px 6px; border-radius: 4px; }
-                </style>
-            </head>
-            <body>
-                <h1>🗂️ File Management System API</h1>
-                <div class="info">
-                    <p>Backend API is running successfully!</p>
-                    <p>API Base URL: <code>/api</code></p>
-                    <p>Health Check: <code>/api/health</code></p>
-                    <p>🔌 Real-time WebSocket: <code>Enabled</code></p>
-                    <p>To use the frontend, build the React app or access the API directly.</p>
-                </div>
-            </body>
-            </html>
-        `);
-    }
 });
 
 // Error handling middlewares
