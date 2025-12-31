@@ -44,6 +44,7 @@ const seedDefaultUser = async () => {
         const user = await User.create({
             userId: userId,
             password: password,
+            email: 'admin@example.com',
             name: 'Default Admin',
             role: 'admin',
             isActive: true

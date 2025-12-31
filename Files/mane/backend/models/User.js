@@ -16,6 +16,13 @@ const UserSchema = new mongoose.Schema({
         minlength: [3, 'User ID must be at least 3 characters'],
         maxlength: [50, 'User ID cannot exceed 50 characters']
     },
+    email: {
+        type: String,
+        unique: true,
+        sparse: true, // Allow null/missing values to not conflict
+        trim: true,
+        lowercase: true
+    },
     password: {
         type: String,
         required: [true, 'Password is required'],

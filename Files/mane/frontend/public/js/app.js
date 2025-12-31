@@ -272,32 +272,6 @@ const App = {
         // Attach event handlers
         document.getElementById('login-form').addEventListener('submit', this.handleLogin.bind(this));
     },
-    
-    /**
-     * Switch between auth tabs
-     */
-    switchAuthTab(tab) {
-        const loginTab = document.getElementById('login-tab');
-        const registerTab = document.getElementById('register-tab');
-        const tabBtns = document.querySelectorAll('.auth-tab-btn');
-        
-        tabBtns.forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.tab === tab) {
-                btn.classList.add('active');
-            }
-        });
-        
-        if (tab === 'login') {
-            loginTab.classList.add('active');
-            registerTab.classList.remove('active');
-            document.getElementById('userId').focus();
-        } else {
-            registerTab.classList.add('active');
-            loginTab.classList.remove('active');
-            document.getElementById('collegeId').focus();
-        }
-    },
 
     /**
      * Handle login form submission
@@ -327,61 +301,6 @@ const App = {
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Sign In';
-        }
-    },
-
-    /**
-     * Handle registration form submission
-     */
-    async handleRegister(e) {
-        e.preventDefault();
-        
-        const collegeId = document.getElementById('collegeId').value.trim();
-        const collegeName = document.getElementById('collegeName').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('regPassword').value;
-        const contactPerson = document.getElementById('contactPerson').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const address = document.getElementById('address').value.trim();
-        const city = document.getElementById('city').value.trim();
-        const state = document.getElementById('state').value.trim();
-        const pinCode = document.getElementById('pinCode').value.trim();
-        const errorDiv = document.getElementById('register-error');
-        const submitBtn = e.target.querySelector('button[type="submit"]');
-
-        try {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Registering...';
-            errorDiv.innerHTML = '';
-
-            const collegeData = {
-                collegeId,
-                collegeName,
-                email,
-                password,
-                contactPerson: contactPerson || undefined,
-                phone: phone || undefined,
-                address: address || undefined,
-                city: city || undefined,
-                state: state || undefined,
-                pinCode: pinCode || undefined
-            };
-
-            const result = await API.auth.register(collegeData);
-
-            if (result.success) {
-                errorDiv.innerHTML = `<div class="login-success">✓ ${result.message}</div>`;
-                this.state.user = result.data.college;
-                setTimeout(() => {
-                    this.renderApp();
-                    this.loadRecords();
-                }, 2000);
-            }
-        } catch (error) {
-            errorDiv.innerHTML = `<div class="login-error">${error.message}</div>`;
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Register College';
         }
     },
 
