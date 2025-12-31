@@ -37,6 +37,7 @@ const io = new Server(server, {
             process.env.FRONTEND_URL || 'http://localhost:3000',
             'http://localhost',
             'http://127.0.0.1',
+            'https://file-management-system-cewt3eqse-anandlavhales-projects.vercel.app/',
             /localhost/,
             /127\.0\.0\.1/
         ],
@@ -52,17 +53,9 @@ app.set('io', io);
 connectDB();
 
 // Middleware
-// Enable CORS for frontend and local development
+// Enable CORS for frontend
 app.use(cors({
-    origin: [
-        process.env.FRONTEND_URL || 'http://localhost:3000',
-        'http://localhost',
-        'http://localhost:3000',
-        'http://127.0.0.1',
-        'http://127.0.0.1:3000',
-        /localhost/,
-        /127\.0\.0\.1/
-    ],
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
