@@ -178,11 +178,30 @@ const register = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Registration error:', error);
+        console.error("Registration error:", error);
+
+        // 🔥 Mongoose validation error
+        if (error.name === "ValidationError") {
+            return res.status(400).json({
+                success: false,
+                message: Object.values(error.errors)
+                    .map(err => err.message)
+                    .join(", ")
+            });
+        }
+
+        // 🔥 Duplicate key error (email / collegeId unique)
+        if (error.code === 11000) {
+            return res.status(400).json({
+                success: false,
+                message: "College ID or email already registered"
+            });
+        }
+
+        // ❌ Actual server error
         res.status(500).json({
             success: false,
-            message: 'Server error during registration',
-            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+            message: "Internal server error"
         });
     }
 };
