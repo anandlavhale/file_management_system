@@ -232,11 +232,6 @@ const App = {
                             <p class="login-subtitle">Admin & College Portal</p>
                         </div>
                         
-                        <div class="auth-tabs">
-                            <button class="auth-tab-btn active" data-tab="login" onclick="App.switchAuthTab('login')">Sign In</button>
-                            <button class="auth-tab-btn" data-tab="register" onclick="App.switchAuthTab('register')">Register College</button>
-                        </div>
-                        
                         <!-- Login Tab -->
                         <div id="login-tab" class="auth-tab-content active">
                             <div id="login-error"></div>
@@ -248,6 +243,7 @@ const App = {
                                         id="userId" 
                                         name="userId" 
                                         placeholder="Enter your User ID (e.g., MESGCC)"
+                                        value="MESGCC"
                                         required
                                         autofocus
                                     >
@@ -260,126 +256,12 @@ const App = {
                                         id="password" 
                                         name="password" 
                                         placeholder="Enter your password"
+                                        value="BBA@123"
                                         required
                                     >
                                 </div>
                                 
                                 <button type="submit" class="btn-login">Sign In</button>
-                            </form>
-                        </div>
-                        
-                        <!-- Registration Tab -->
-                        <div id="register-tab" class="auth-tab-content">
-                            <div id="register-error"></div>
-                            <form id="register-form" class="register-form">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="collegeId">College ID</label>
-                                        <input 
-                                            type="text" 
-                                            id="collegeId" 
-                                            name="collegeId" 
-                                            placeholder="e.g., MESGCC"
-                                            required
-                                        >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="collegeName">College Name</label>
-                                        <input 
-                                            type="text" 
-                                            id="collegeName" 
-                                            name="collegeName" 
-                                            placeholder="Full college name"
-                                            required
-                                        >
-                                    </div>
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="email">Email Address</label>
-                                        <input 
-                                            type="email" 
-                                            id="email" 
-                                            name="email" 
-                                            placeholder="college@example.com"
-                                            required
-                                        >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone">Phone Number</label>
-                                        <input 
-                                            type="tel" 
-                                            id="phone" 
-                                            name="phone" 
-                                            placeholder="Phone number"
-                                        >
-                                    </div>
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="contactPerson">Contact Person</label>
-                                        <input 
-                                            type="text" 
-                                            id="contactPerson" 
-                                            name="contactPerson" 
-                                            placeholder="Full name"
-                                        >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="regPassword">Password</label>
-                                        <input 
-                                            type="password" 
-                                            id="regPassword" 
-                                            name="regPassword" 
-                                            placeholder="Minimum 6 characters"
-                                            required
-                                        >
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input 
-                                        type="text" 
-                                        id="address" 
-                                        name="address" 
-                                        placeholder="Street address"
-                                    >
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="city">City</label>
-                                        <input 
-                                            type="text" 
-                                            id="city" 
-                                            name="city" 
-                                            placeholder="City"
-                                        >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="state">State</label>
-                                        <input 
-                                            type="text" 
-                                            id="state" 
-                                            name="state" 
-                                            placeholder="State"
-                                        >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="pinCode">Pin Code</label>
-                                        <input 
-                                            type="text" 
-                                            id="pinCode" 
-                                            name="pinCode" 
-                                            placeholder="Pin code"
-                                        >
-                                    </div>
-                                </div>
-                                
-                                <button type="submit" class="btn-login">Register College</button>
                             </form>
                         </div>
                     </div>
@@ -389,7 +271,6 @@ const App = {
 
         // Attach event handlers
         document.getElementById('login-form').addEventListener('submit', this.handleLogin.bind(this));
-        document.getElementById('register-form').addEventListener('submit', this.handleRegister.bind(this));
     },
     
     /**

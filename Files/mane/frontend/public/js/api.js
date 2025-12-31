@@ -90,28 +90,20 @@ const API = {
     ========================== */
 
     auth: {
-       async request(endpoint, options = {}) {
-  const url = `${CONFIG.API_BASE_URL}${endpoint}`;
+        async login(userId, password) {
+            const data = await API.request("/auth/login", {
+                method: "POST",
+                body: JSON.stringify({ userId, password })
+            });
 
-  const response = await fetch(url, {
-    credentials: "include", // 🔥 REQUIRED
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {})
-    },
-    ...options
-  });
+            if (data?.success) {
+                API.setToken(data.data.token);
+                API.setUser(data.data.user);
+            }
 
-  const data = await response.json();
+            return data;
+        },
 
-  // ✅ correct logic
-  if (!response.ok) {
-    throw new Error(data.message || "API request failed");
-  }
-
-  return data;
-}
-,
         async register(collegeData) {
             const data = await API.request("/auth/register", {
                 method: "POST",
