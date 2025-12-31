@@ -227,7 +227,7 @@ const App = {
                 <div class="login-container">
                     <div class="login-box">
                         <div class="login-header">
-                            <div class="login-logo">📁</div>
+                            <div class="login-logo"><img src="images/logo.png" alt="Logo"></div>
                             <h1 class="login-title">File Management System</h1>
                             <p class="login-subtitle">Admin & College Portal</p>
                         </div>
@@ -330,7 +330,7 @@ const App = {
             <div class="app-container">
                 <header class="app-header">
                     <div class="header-brand">
-                        <div class="header-logo">📁</div>
+                        <div class="header-logo"><img src="images/logo.png" alt="Logo"></div>
                         <div>
                             <h1 class="header-title">File Management System</h1>
                             <p class="header-subtitle">Manage your files efficiently</p>
@@ -393,7 +393,7 @@ const App = {
                                     <div class="file-input-wrapper">
                                         <input type="file" id="file" class="file-input" required>
                                         <div class="file-input-display" onclick="document.getElementById('file').click()">
-                                            <div class="file-input-icon">📄</div>
+                                            <div class="file-input-icon"><img src="images/logo.png" alt="Logo"></div>
                                             <div class="file-input-text">Click to select a file or drag and drop</div>
                                             <div class="file-input-name" id="selected-file-name"></div>
                                         </div>
