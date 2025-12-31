@@ -132,7 +132,7 @@ const App = {
         this.initSocket();
         
         // DEMO MODE: Show main UI directly (bypass login for preview)
-        const demoMode = true; // Set to false to enable login
+        const demoMode = false; // Set to false to enable login
         
         if (demoMode) {
             this.state.user = { userId: 'MESGCC', role: 'admin' };
